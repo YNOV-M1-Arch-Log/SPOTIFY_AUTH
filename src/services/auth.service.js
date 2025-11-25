@@ -1,6 +1,6 @@
 import { userRepository } from '../repositories/user.repository.js';
 import { hashPassword, comparePassword } from '../utils/password.js';
-import { generateAccessToken, generateRefreshToken } from '../utils/jwt.js';
+import { generateAccessToken } from '../utils/jwt.js';
 
 export const authService = {
   register: async ({ username, email, password }) => {
@@ -35,9 +35,8 @@ export const authService = {
     };
 
     const accessToken = generateAccessToken(payload);
-    const refreshToken = generateRefreshToken(payload);
 
-    return { user, accessToken, refreshToken };
+    return { user, accessToken };
   },
 
   login: async ({ identifier, password }) => {
@@ -68,8 +67,7 @@ export const authService = {
     };
 
     const accessToken = generateAccessToken(payload);
-    const refreshToken = generateRefreshToken(payload);
 
-    return { user, accessToken, refreshToken };
+    return { user, accessToken };
   },
 };

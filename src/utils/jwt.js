@@ -7,16 +7,6 @@ export const generateAccessToken = (payload) => {
   });
 };
 
-export const generateRefreshToken = (payload) => {
-  return jwt.sign(payload, env.jwt.refreshSecret, {
-    expiresIn: env.jwt.refreshExpiresIn || '7d',
-  });
-};
-
 export const verifyAccessToken = (token) => {
   return jwt.verify(token, env.jwt.secret);
-};
-
-export const verifyRefreshToken = (token) => {
-  return jwt.verify(token, env.jwt.refreshSecret);
 };

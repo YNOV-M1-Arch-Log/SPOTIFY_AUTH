@@ -64,9 +64,6 @@ export const authController = {
     }
   },
   verify: (req, res) => {
-
-    console.log("TEST ICI");
-
     try {
       const authHeader = req.headers.authorization || '';
 

@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import jwt from 'jsonwebtoken';
 import { authService } from '../services/auth.service.js';
+import { sendAlertLogin } from '../services/mail.service.js';
 
 // Validation pour l’inscription
 const registerSchema = Joi.object({
@@ -51,7 +52,7 @@ export const authController = {
 
       const result = await authService.login({ identifier, password });
 
-      return res.status(200).json({
+      res.status(200).json({
         user: {
           id: result.user.id,
           username: result.user.username,
@@ -59,10 +60,14 @@ export const authController = {
         },
         accessToken: result.accessToken,
       });
+
+      await sendAlertLogin(result.user.email);
+
     } catch (err) {
       next(err);
     }
   },
+
   verify: (req, res) => {
     try {
       const authHeader = req.headers.authorization || '';

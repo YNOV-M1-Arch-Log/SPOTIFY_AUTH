@@ -16,4 +16,6 @@ export const env = {
     secret: process.env.JWT_SECRET,
     expiresIn: process.env.JWT_EXPIRES_IN,
   },
+  smtpServiceUrl: process.env.SMTP_SERVICE_URL,
+  smtpServiceKey: process.env.SMTP_SERVICE_KEY,
 };
